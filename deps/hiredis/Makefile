@@ -40,6 +40,9 @@ ifeq ($(uname_S),Darwin)
   DYLIB_MAJOR_NAME=$(LIBNAME).$(HIREDIS_MAJOR).$(DYLIBSUFFIX)
   DYLIB_MAKE_CMD=$(CC) -shared -Wl,-install_name,$(DYLIB_MINOR_NAME) -o $(DYLIBNAME) $(LDFLAGS)
 endif
+ifeq ($(uname_S),NetBSD)
+  REAL_CFLAGS+= -D_NETBSD_SOURCE
+endif
 
 all: $(DYLIBNAME) $(BINS)
 
